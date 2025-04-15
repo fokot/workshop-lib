@@ -11,13 +11,23 @@ jobs:
   build:
     timeout-minutes: 10
     runs-on: ubuntu-latest
-    container:
-      image: sbtscala/scala-sbt:graalvm-community-22.0.1_1.10.11_3.6.4
-    env:
-      MAVEN_WRITE_USERNAME: ${{ secrets.MAVEN_WRITE_USERNAME }}
-      MAVEN_WRITE_PASSWORD: ${{ secrets.MAVEN_WRITE_PASSWORD }}
+#    container:
+#      image: sbtscala/scala-sbt:graalvm-community-22.0.1_1.10.11_3.6.4
+#    env:
+#      MAVEN_WRITE_USERNAME: ${{ secrets.MAVEN_WRITE_USERNAME }}
+#      MAVEN_WRITE_PASSWORD: ${{ secrets.MAVEN_WRITE_PASSWORD }}
 
     steps:
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'
+
+      - name: Install sbt
+        run: |
+          curl -L https://github.com/sbt/sbt/releases/download/v1.10.11/sbt-1.10.11.tgz | tar xz
+          echo "$PWD/sbt/bin" >> $GITHUB_PATH
+
       - name: Checkout
         uses: actions/checkout@v4
 
