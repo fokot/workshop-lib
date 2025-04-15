@@ -14,7 +14,7 @@ lazy val root = project
   .in(file("."))
   .settings(
     name := "workshop-lib",
-    version := "0.3.0-SNAPSHOT",
+    version := "0.4.0-SNAPSHOT",
 
     scalaVersion := scala3Version,
     crossScalaVersions := Seq(scala3Version, scala2Version),
